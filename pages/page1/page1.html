@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../../index.css">
+<link rel="stylesheet" href="../../cjs/jquery.mCustomScrollbar.css" />
+<link href="../../fonts/font-awesome/css/all.css" rel="stylesheet">
+<script src="../../cjs/easeljs-0.8.2.min.js"></script> 
+<script src="../../cjs/tweenjs-0.6.2.min.js"></script> 
+<script src="../../cjs/preloadjs-0.6.2.min.js"></script> 
+<script src="../../cjs/soundjs-0.6.2.min.js"></script> 
+<script src="page.js"></script> 
+<script src="../../principal.js"></script> 
+<script src="../../cjs/jquery.min.js"></script> 
+<script src="../../cjs/jquery.imagemapster.js"></script> 
+<script src="../../cjs/jquery.mCustomScrollbar.concat.min.js"></script> 
+<script src="../../cjs/jquery-ui.min.js"></script> 
+<script src="../../cjs/jquery.ui.touch-punch.min.js"></script> 
+<script>
+	
+	
+var canvas, stage, exportRoot;
+function init() {
+	canvas = document.getElementById("canvas");
+	var loader = new createjs.LoadQueue(false);
+	loader.installPlugin(createjs.Sound);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.addEventListener("progress", handleProgress);
+	loader.loadManifest(lib.properties.manifest);
+  $.getJSON("../../images/animaciones_atlas_.json", function(json) {
+      frames_animacion = json.frames;
+    });
+}
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+function playSound(id, loop) {
+	createjs.Sound.play(id, createjs.Sound.INTERRUPT_EARLY, 0, 0, loop);
+}
+ancho_linea = 0;
+alto_linea = 10;
+max_ancho = 450;
+function handleProgress(evt) {
+	stage = new createjs.Stage(canvas);
+	var bordePadding = 2;
+    var borde = new createjs.Shape;
+    borde.graphics.beginFill("rgba(131,120,111,0.4)").drawRect(0, 0, max_ancho + bordePadding*2, alto_linea).endFill();
+    var linea_carga = new createjs.Shape();
+	linea_carga.graphics.beginFill("#009DDF").drawRect(0 + bordePadding,0 + bordePadding, ancho_linea, alto_linea - bordePadding*2).endFill();
+    progreso = Math.round(evt.loaded * max_ancho);
+	ancho_linea = progreso;
+	contenedor = new createjs.Container();
+	contenedor.x = 1240/2 - max_ancho/2;
+	contenedor.y = 495*4/5 - alto_linea/2;
+	contenedor.addChild(borde, linea_carga);
+	//stage.addChild(contenedor);
+	stage.update();
+}
+function handleComplete(evt) {
+	var queue = evt.target;
+	stage = new createjs.Stage(canvas);
+	createjs.Ticker.addEventListener("tick", stage);
+	/////Variables
+	sin_personaje = true;
+	globo_personaje = "Empecemos identificando la importancia del programa de bloqueo y etiquetado, las actividades en las que se debe aplicar y algunos conceptos asociados.";
+	pausas_audio = [[0,16406],[977,19347]];
+
+  coord_flecha_next = [900,100];
+
+  contenidos();	
+}
+</script>
+</head>
+<body onload="init();">
+<canvas id="canvas" width="1260" height="550"></canvas>
+<div id="instruccion_circulos" class="instruccion_circulos"> </div>
+<div class="c_principal c_4_6">
+  <h1 data-posabsbtn="170,320">Política ABAC</h1>
+  <div class="item_c">
+    <div class="txt_c">
+      <div class="cont_audio">
+        <div class="audio_c">
+          <audio controls style="margin-top: 15px;">
+            <source src="sounds/diap4.mp3" type="audio/mpeg">
+            Your browser does not support the audio tag. </audio>
+        </div>
+        <div class="subs_audio">
+          <div class="resaltado_especial">La <span class="negrilla">Política Antisoborno y Anticorrupción</span> busca integrar los elementos del Sistema de Control Interno, prevenir y gestionar eventos de soborno y corrupción,  y promover los principios y valores relacionados con la ética empresarial y las políticas corporativas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item_c"> <img src="images/diap4.png" height="300"> </div>
+</div>
+<div class="c_principal c_2_6">
+  <h1 data-posabsbtn="700,220">Terceras Partes Intermediarias (TPI)</h1>
+  <div class="item_c">
+    <h1></h1>
+  </div>
+  <div class="item_c" style="margin: 0 30px;">
+    <div class="txt_interno c_1">
+      <h1>Inicio</h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap6a.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio"> Los TPI deben entenderse como cualquier tercero, diferente a cliente o trabajador, para realizar una transacción de forma particular o periódica con el objetivo de vender los productos o servicios del Banco, o comprar bienes y/o servicios para el Banco, en calidad de agente o intermediario con agentes y/o entidades públicas como contrapartes<br> –“government officials”. </div>
+        </div>
+        <div class="instruccion_interna">Pasa el mouse sobre el dato de interés</div>
+        <div id="zona_sensible0" class="negrilla_sensible">
+          <p><i class="fad fa-comment-exclamation"></i></p>
+          <p>Dato de interés</p>
+        </div>
+        <div class='instruccion_interna'><span class='indica_instclic'></span>Pulsa los botones de la izquierda para ampliar la información.</div>
+      </div>
+    </div>
+    <div class="txt_interno c_3_2">
+      <h1>Parámetros </h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap7.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">Todo TPI debe atender como mínimo los siguientes parámetros por parte de las entidades: <br>
+            <table class="lista_vinetas">
+              <tr>
+                <td class="vineta"></td>
+                <td> Diligenciamiento de formatos para conocimiento del tercero. </td>
+              </tr>
+              <tr>
+                <td class="vineta"></td>
+                <td> Documentación completa para debida diligencia. </td>
+              </tr>
+              <tr>
+                <td class="vineta"></td>
+                <td> Para los <span class="negrilla">TPI nivel de riesgo alto </span>es necesario el concepto de no objeción por parte del Oficial de Cumplimiento. </td>
+              </tr>
+              <tr>
+                <td class="vineta"></td>
+                <td> Seguimiento – Monitoreo periódico. </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="item_c"><img src="images/diap7.png" height="300"> </div>
+    </div>
+    <div class="txt_interno c_1">
+      <h1>Identificación</h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap8a.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">Para identificar un TPI, deberás obtener un SÍ como respuesta a una de las siguientes preguntas:</div>
+        </div>
+        <div class="instruccion_interna">Pasa el mouse sobre los íconos y textos resaltados</div>
+        <table style="text-align: center; margin: auto; width: 670px;">
+          <tr>
+            <td ><div class="infografia"> <img src="images/diap8.png" height="220">
+                <p></p>
+                <map data-restriccion="no">
+                  <area id="zona_sensible1" shape="circ" coords="91,335,70">
+                  <area id="zona_sensible2" shape="circ" coords="166,156,70">
+                  <area id="zona_sensible3" shape="circ" coords="360,74,70">
+                  <area id="zona_sensible4" shape="circ" coords="538,154,70">
+                  <area id="zona_sensible5" shape="circ" coords="613,329,70">
+                </map>
+              </div></td>
+            <td style="width: 300px;"><div id="zona_sensible6" class="negrilla_sensible">
+                <p><i class="fad fa-comment-exclamation"></i></p>
+                <p>Dato de interés</p>
+              </div></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="txt_interno c_1">
+      <h1>Administración</h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap9a.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">Para la administración de un TPI, se deben llevar a cabo las siguientes actividades: </div>
+        </div>
+        <div class="instruccion_interna">Pasa el mouse sobre los íconos y textos resaltados</div>
+        <div class="infografia"> <img src="images/diap9.png" height="200">
+          <p></p>
+          <map data-restriccion="no">
+            <area id="zona_sensible7" shape="circ" coords="68,66,55">
+            <area id="zona_sensible8" shape="circ" coords="201,66,55">
+            <area id="zona_sensible9" shape="circ" coords="337,66,55">
+            <area id="zona_sensible10" shape="circ" coords="472,66,55">
+            <area id="zona_sensible11" shape="circ" coords="605,66,55">
+            <area id="zona_sensible12" shape="circ" coords="739,66,55">
+            <area id="zona_sensible13" shape="circ" coords="874,66,55">
+            <area id="zona_sensible14" shape="circ" coords="1012,66,55">
+            <area id="zona_sensible15" shape="rect" coords="494,189,657,257">
+          </map>
+        </div>
+        <!--
+        <div style="position: absolute;
+    top: 322px;
+    left: 395px;
+    width: 50px;">
+          <div class="negrilla_sensible" id="zona_sensible15">Actividad conjunta </div>
+        </div>--> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c_principal c_1_2">
+  <h1 data-posabsbtn="170,320">Actividades de seguimiento de la Segunda Línea</h1>
+  <div class="item_c">
+    <div class="txt_c" style="width: 310px;">
+      <div class="cont_audio">
+        <div class="audio_c">
+          <audio controls style="margin-top: 15px;">
+            <source src="sounds/diap11.mp3" type="audio/mpeg">
+            Your browser does not support the audio tag. </audio>
+        </div>
+        <div class="subs_audio">La Segunda Línea debe hacer un <span class="negrilla">seguimiento continuo</span> del cumplimiento de las obligaciones en materia de Riesgo de Corrupción, acompañando a los Dueños de Proceso (Primera Línea) en la identificación de riesgos y controles clave suficientes para su mitigación, y realizando las actividades que se indican en la tabla. </div>
+      </div>
+    </div>
+  </div>
+  <div class="item_c">
+    <table class="tabla_estilo" style="text-align: center; margin: auto;
+    font-size: 12px;
+    line-height: 15px;">
+      <tr>
+        <th> Actividad </th>
+        <th> Periodicidad </th>
+      </tr>
+      <tr>
+        <td> Preparación de matrices de riesgo y sesiones de calificación de riesgo con dueños de proceso </td>
+        <td> Semestral </td>
+      </tr>
+      <tr>
+        <td> Evaluación efectividad de controles (con base en la matriz de riesgos) </td>
+        <td> Semestral </td>
+      </tr>
+      <tr>
+        <td> Monitoreo de cuentas contables </td>
+        <td> Mensual </td>
+      </tr>
+      <tr>
+        <td> Señales de alerta </td>
+        <td> Mensual – Trimestral – Semestral – Anual </td>
+      </tr>
+      <tr>
+        <td> Atención a entes de control (Auditoría interna, Contraloría AVAL, KPMG Corporativa FCPA, entre otras) </td>
+        <td> Semestral - Anual </td>
+      </tr>
+      <tr>
+        <td> Implementación de actualizaciones y nuevas instrucciones </td>
+        <td> Cada vez que se presente </td>
+      </tr>
+      <tr>
+        <td> Monitoreo general de los componentes ABAC </td>
+        <td> Cada vez que se presente </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="mas_personaje c_1">
+  <h1></h1>
+  <div class="item_c"></div>
+</div>
+<div class="c_principal c_1_2">
+  <h1 data-posabsbtn="170,320">Regalos o invitaciones</h1>
+  <div class="item_c">
+    <div class="cont_audio">
+      <div class="audio_c">
+        <audio controls style="margin-top: 15px;">
+          <source src="sounds/diap13a.mp3" type="audio/mpeg">
+          Your browser does not support the audio tag. </audio>
+      </div>
+      <div class="subs_audio">Los regalos o invitaciones permitidos a otorgar y recibir son: </div>
+    </div>
+  </div>
+  <div class="item_c">
+    <div class="instruccion_interna">Pasa el mouse sobre los textos resaltados</div>
+    <div class="txt_c">
+      <table style="text-align: center; margin: auto;">
+        <tr>
+          <td><div class="resaltado_especial">Artículos promocionales </div>
+            <img src="images/diap13a.png" height="150"></td>
+          <td><div class="resaltado_especial">Artículos en <span class="negrilla_sensible" id="zona_sensible16">fechas especiales</span></div>
+            <img src="images/diap13b.png" height="150"></td>
+        </tr>
+      </table>
+      <div id="zona_sensible17" class="negrilla_sensible">
+        <p><i class="fad fa-comment-exclamation"></i></p>
+        <p>Dato de interés</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c_masinfo c_2_6" style="width: 1020px;">
+  <h1>Instancias de aprobación</h1>
+  <div class="item_c">
+    <h1></h1>
+  </div>
+  <div class="item_c" style="margin: 0 30px;">
+    <div class="txt_interno c_1_1">
+      <h1>Inicio</h1>
+      <div class="item_c" style="margin-top: -35px;">
+        <div class="instruccion_interna">Pasa el mouse sobre los textos resaltados</div>
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap17a.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">Las instancias de aprobación para otorgamiento y recepción son: </div>
+        </div>
+        <div class="negrilla_sensible" id="zona_sensible18">Presidente </div>
+        <div class="negrilla_sensible" id="zona_sensible19">Vicepresidentes </div>
+        <div class="negrilla_sensible" id="zona_sensible20">Gerentes </div>
+      </div>
+      <div class="item_c"><img src="images/diap17.png" height="190">
+        <div id="zona_sensible21" class="negrilla_sensible">
+          <p><i class="fad fa-comment-exclamation"></i></p>
+          <p>Dato de interés</p>
+        </div>
+        <div class="instruccion_interna">Pulsa el botón para ampliar la información.</div>
+      </div>
+    </div>
+    <div class="txt_interno c_1_1">
+      <h1>Casos especiales</h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap18a.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">Cuando se requiera la aprobación de instancias superiores se deberá:</div>
+        </div>
+      </div>
+      <div class="item_c" style="margin-top: -20px;">
+        <div class="instruccion_interna">Pasa el mouse sobre los íconos y textos resaltados </div>
+        <div class="infografia"> <img src="images/diap18.png" height="100">
+          <p></p>
+          <map data-restriccion="no">
+            <area id="zona_sensible22" shape="circ" coords="76,152,70">
+            <area id="zona_sensible23" shape="circ" coords="623,152,70">
+          </map>
+        </div>
+        <div id="zona_sensible24" class="negrilla_sensible">
+          <p><i class="fad fa-comment-exclamation"></i></p>
+          <p>Dato de interés</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<div class="c_masinfo c_2_6" style="width: 1020px;">
+  <h1>Instancias de aprobación</h1>
+  <div class="item_c">
+    <h1></h1>
+  </div>
+  <div class="item_c" style="margin: 0 30px;">
+    <div class="txt_interno c_1">
+      <h1>Inicio</h1>
+      <div class="item_c">
+        <div class='instruccion_interna'><span class='indica_instclic'></span>Pulsa los botones para conocer las instancias de aprobación en cada caso.</div>
+      </div>
+    </div>
+    <div class="txt_interno c_1">
+      <h1>Otorgamiento</h1>
+      <div class="item_c">
+        <div class="txt_internob c_3_2">
+          <h1>Inicio</h1>
+          <div class="item_c" style="margin-top: -35px;">
+            <div class="instruccion_interna">Pasa el mouse sobre los textos resaltados</div>
+            <div class="cont_audio">
+              <div class="audio_c">
+                <audio controls style="margin-top: 15px;">
+                  <source src="sounds/diap15a.mp3" type="audio/mpeg">
+                  Your browser does not support the audio tag. </audio>
+              </div>
+              <div class="subs_audio">Las instancias de aprobación para otorgamiento son: </div>
+            </div>
+            <div class="negrilla_sensible" id="zona_sensible18">Presidente </div>
+            <div class="negrilla_sensible" id="zona_sensible19">Vicepresidentes </div>
+            <div class="negrilla_sensible" id="zona_sensible20">Gerentes </div>
+          </div>
+          <div class="item_c"><img src="images/diap15.png" height="190">
+            <div class="instruccion_interna">Pulsa el botón para ampliar la información.</div>
+          </div>
+        </div>
+        <div class="txt_internob c_1_1">
+          <h1>Casos especiales</h1>
+          <div class="item_c">
+            <div class="cont_audio">
+              <div class="audio_c">
+                <audio controls style="margin-top: 15px;">
+                  <source src="sounds/diap16a.mp3" type="audio/mpeg">
+                  Your browser does not support the audio tag. </audio>
+              </div>
+              <div class="subs_audio">Cuando se cumplan de manera integral las siguientes condiciones se deberá contar con la <span class="negrilla">no objeción del Oficial de Cumplimiento</span> (con especial énfasis para funcionarios entidades públicas):</div>
+            </div>
+          </div>
+          <div class="item_c">
+            <div class="instruccion_interna">Pasa el mouse sobre los íconos y textos resaltados</div>
+            <div class="infografia"> <img src="images/diap16.png" height="80">
+              <p></p>
+              <map data-restriccion="no">
+                <area id="zona_sensible21" shape="circ" coords="75,81,70">
+                <area id="zona_sensible22" shape="circ" coords="259,81,70">
+                <area id="zona_sensible23" shape="circ" coords="443,81,70">
+              </map>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="txt_interno c_1">
+      <h1>Recepción</h1>
+      <div class="item_c">
+        <div class="txt_internob c_3_2">
+          <h1>Inicio</h1>
+          <div class="item_c" style="margin-top: -35px;">
+            <div class="instruccion_interna">Pasa el mouse sobre los textos resaltados</div>
+            <div class="cont_audio">
+              <div class="audio_c">
+                <audio controls style="margin-top: 15px;">
+                  <source src="sounds/diap17a.mp3" type="audio/mpeg">
+                  Your browser does not support the audio tag. </audio>
+              </div>
+              <div class="subs_audio">Las instancias de aprobación para recepción son: </div>
+            </div>
+            <div class="negrilla_sensible" id="zona_sensible25">Presidente </div>
+            <div class="negrilla_sensible" id="zona_sensible26">Vicepresidentes </div>
+            <div class="negrilla_sensible" id="zona_sensible27">Gerentes </div>
+          </div>
+          <div class="item_c"><img src="images/diap17.png" height="190">
+            <div class="instruccion_interna">Pulsa el botón para ampliar la información.</div>
+          </div>
+        </div>
+        <div class="txt_internob c_1_1">
+          <h1>Casos especiales</h1>
+          <div class="item_c">
+            <div class="cont_audio">
+              <div class="audio_c">
+                <audio controls style="margin-top: 15px;">
+                  <source src="sounds/diap18a.mp3" type="audio/mpeg">
+                  Your browser does not support the audio tag. </audio>
+              </div>
+              <div class="subs_audio">Cuando se requiera la aprobación de instancias superiores se deberá:</div>
+            </div>
+          </div>
+          <div class="item_c" style="margin-top: -20px;">
+            <div class="instruccion_interna">Pasa el mouse sobre los íconos y textos resaltados </div>
+            <div class="infografia"> <img src="images/diap18.png" height="100">
+              <p></p>
+              <map data-restriccion="no">
+                <area id="zona_sensible28" shape="circ" coords="76,152,70">
+                <area id="zona_sensible29" shape="circ" coords="623,152,70">
+              </map>
+            </div>
+            <div id="zona_sensible30" class="negrilla_sensible">
+              <p><i class="fad fa-comment-exclamation"></i></p>
+              <p>Dato de interés</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+<div class="c_principal c_1">
+  <h1 data-posabsbtn="170,320">Prácticas no autorizadas</h1>
+  <div class="item_c">
+    <div class="cont_audio">
+      <div class="audio_c">
+        <audio controls style="margin-top: 15px;">
+          <source src="sounds/diap20a.mp3" type="audio/mpeg">
+          Your browser does not support the audio tag. </audio>
+      </div>
+      <div class="subs_audio">Respecto a las prácticas no autorizadas, es importante tener en cuenta las siguientes consideraciones: </div>
+    </div>
+    <div class="infografia"> <img src="images/diap20.png" height="250">
+      <map data-restriccion="no">
+        <area id="zona_sensible25" shape="circ" coords="496,191,70">
+        <area id="zona_sensible26" shape="circ" coords="680,191,70">
+        <area id="zona_sensible27" shape="circ" coords="862,191,70">
+        <area id="zona_sensible28" shape="circ" coords="1052,191,70">
+      </map>
+    </div>
+  </div>
+</div>
+<div class="mas_personaje c_1">
+  <h1></h1>
+  <div class="item_c"></div>
+</div>
+<div class="c_principal c_1-1">
+  <h1  data-posabsbtn="700,220">Actividad</h1>
+  <div class="item_c">
+    <div class="txt_c">
+      <table style="text-align: center; margin: auto; width: 800px;">
+        <td><div class="cont_audio">
+              <div class="audio_c">
+                <audio controls style="margin-top: 15px;">
+                  <source src="sounds/diap22.mp3" type="audio/mpeg">
+                  Your browser does not support the audio tag. </audio>
+              </div>
+              <div class="subs_audio">
+                <div>Es momento de aplicar lo que has aprendido para vencer a Gerard y proteger a la jueza.<br>
+                  <br>
+                  Pulsa el botón “Ir a las preguntas” para resolver algunas actividades.</div>
+              </div>
+            </div></td>
+          <td style="width: 240px;"><img src="images/diap22.png" height="300"></td>
+      </table>
+    </div>
+  </div>
+  <div class="item_c">
+    <div class="boton_siguiente">
+      <div id="txt_btnsig2">IR A LAS PREGUNTAS </div>
+    </div>
+  </div>
+</div>
+<div id="pop0" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap6b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Los intermediarios son consultores de desarrollo del negocio, representantes de ventas, agentes aduaneros, abogados, contadores, etc., quienes normalmente son aliados locales que tienen un gran conocimiento de las costumbres y prácticas comerciales locales y una amplia red personal.</div>
+<div id="pop1" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap8b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  ¿El tercero – proveedor es empresa del Estado*? </div>
+<div id="pop2" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap8c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  ¿El 60 % o más de los ingresos del tercero - proveedor son por contratación estatal? </div>
+<div id="pop3" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap8d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  ¿El proveedor - tercero tiene contratos con el Estado*? </div>
+<div id="pop4" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap8e.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  ¿Es el proveedor – tercero propiedad total o parcial, o alguno de sus integrantes de la alta gerencia o socios pertenece a alguna entidad del Estado* o es un empleado gubernamental o es pariente de algún empleado gubernamental? </div>
+<div id="pop5" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap8f.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  ¿Para el cumplimiento del objeto del contrato, el proveedor - tercero tendrá interacción de algún tipo con el sector público – Estado*, o alguna entidad o funcionario público? </div>
+<div id="pop6" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap8g.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <div> Los <em>vendors</em> y todos los que capten o coloquen productos en nombre del Banco Popular también son TPI.<br>
+    <br>
+    *Ten presente que la referencia al Estado incluye Sector Público, Sector Gobierno, Funcionario Público, Funcionario del Gobierno y Empresa del Sector Público.</div>
+</div>
+<div id="pop7" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Analizar bases de datos con el propósito de identificar la lista completa de TPI. </div>
+<div id="pop8" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Identificar y categorizar los TPI, definir el tipo de relación establecida con el tercero y agrupar por tipo de servicio. </div>
+<div id="pop9" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Determinar grado de exposición al riesgo corrupción: aplicar el formato “Determinación del Nivel de Riesgo TPI” para identificar el nivel de riesgo inherente de cada uno de ellos.<br>
+  <span class="negrilla"> Previo a la vinculación y la renovación del contrato con el proveedor TPI o no TPI.</span> </div>
+<div id="pop10" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9e.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Aplicar procedimientos de debida diligencia de acuerdo con el grado de riesgo de cada TPI. Como resultado de este proceso se confirmará o ajustará el nivel de riesgo del tercero. </div>
+<div id="pop11" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9f.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Tomar la decisión de aceptar o rechazar la relación con el tercero. </div>
+<div id="pop12" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9g.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Identificar señales de alerta. </div>
+<div id="pop13" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9h.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Monitorear la relación con el TPI. </div>
+<div id="pop14" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9i.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Reportar los resultados anualmente a la Vicepresidencia de Riesgo (o quien haga sus veces). </div>
+<div id="pop15" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap9j.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El Oficial de Cumplimiento emitirá concepto indicando la no objeción de la viabilidad de la vinculación de un TPI de nivel de riesgo alto y sus condicionamientos. </div>
+<div id="pop16" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap13b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Navidad, Día del Amor y la Amistad, Día de la Mujer, Día de la Secretaria, Día del Niño, entre otros. </div>
+<div id="pop17" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap13c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  No podrá superar el <span class="negrilla">0,5 % del valor del salario mensual del trabajador</span> que lo recibe, y sin que dicho monto <span class="negrilla">supere 2 SMMLV</span>. En caso que supere los límites anteriores deberá solicitarse la aprobación de acuerdo con la Tabla de atribuciones para aprobaciones en el otorgamiento de regalos o invitaciones. </div>
+<!--
+<div id="pop18" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap15b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El presidente, quien haga sus veces o quienes este delegue podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación superior a 4 SMMLV</span> </div>
+<div id="pop19" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap15c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Los vicepresidentes, quienes hagan sus veces o quienes estos deleguen podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación entre 2 y 4 SMMLV</span> </div>
+<div id="pop20" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap15d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Los gerentes o quienes hagan sus veces podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación entre 0,5 y hasta 2 SMMLV</span> </div>
+<div id="pop21" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap16b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  No esté relacionado con el giro ordinario del negocio. </div>
+<div id="pop22" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap16c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  No sea otorgado por un representante legal, apoderado. </div>
+<div id="pop23" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap16d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Exceda 4 SMMLV por regalo o invitación. </div>-->
+<div id="pop18" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap17b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El presidente, quien haga sus veces o quienes este delegue podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación superior a 4 SMMLV</span> </div>
+<div id="pop19" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap17c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Los vicepresidentes, quienes hagan sus veces o quienes estos deleguen podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación entre 2 y 4 SMMLV</span> </div>
+<div id="pop20" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap17d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Los gerentes o quienes hagan sus veces podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación entre 0,5 y hasta 2 SMMLV</span> </div>
+<div id="pop21" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap16e.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El reembolso de gastos por bebidas alcohólicas deberá ser aprobado por el jefe inmediato, por quien haga sus veces o por quien cada entidad designe, y, por lo menos, deberá cumplir con las políticas de reembolso de gastos por este concepto y asegurando la proporcionalidad del gasto. <br>
+  Si el reembolso es solicitado por la Presidencia, será autorizado por la Vicepresidencia Financiera. </div>
+<div id="pop22" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap18b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Diligenciar los formatos <span class="negrilla">Solicitud para otorgar o recibir regalos e invitaciones y Cierre Recibo y Otorgamiento de Regalos e Invitaciones</span>, y junto con su aprobación entregarlos a la Dirección ABAC para emisión de concepto. </div>
+<div id="pop23" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap18c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Reportar en la<span class="negrilla"> Bitácora de registro</span>, publicada en la página de Enlace Virtual. </div>
+<div id="pop24" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap18d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Si se recibe un regalo o invitación a un familiar del trabajador o si el regalo llega al lugar del domicilio del trabajador también deberá ser reportado en la Bitácora. </div>
+<div id="pop25" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap20b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Queda expresamente prohibido utilizar figuras como publicidad, pago de eventos a favor de terceros, comodatos, regalos, invitaciones, patrocinios y/o donaciones como parte de las reciprocidades con clientes. </div>
+<div id="pop26" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap20c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Programas de fidelización</span> no se consideran reciprocidades y deberán cumplir con los mínimos requeridos desde el punto de vista NIIF para su registro como tal. </div>
+<div id="pop27" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap20d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El ofrecimiento de <span class="negrilla">beneficios a clientes</span> debe estar soportado y documentado en un análisis de relación costo/beneficio, de cara al portafolio completo del cliente. Si el retorno realizado con un cliente se desfasa por debajo de la media esperada, se debe contar con autorización expresa de la instancia superior que corresponda. </div>
+<div id="pop28" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap20e.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Está prohibido que el Banco Popular y sus filiales realicen <span class="negrilla">comodatos</span> a clientes o proveedores. Si por alguna consideración excepcional contractual se hace necesario otorgar bienes bajo esta figura, todos, sin excepción y de manera individual, deben ser previamente autorizados por la Gerencia de Cumplimiento – Dirección ABAC, basados en documentación robusta de cada operación suministrada por la primera línea de defensa a cargo de dicha transacción. </div>
+</body>
+</html>
